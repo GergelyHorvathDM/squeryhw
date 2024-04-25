@@ -8,9 +8,13 @@ In case of this issue, attrition prediction is formulated as a binary classifica
 
 *Note: data science process is highly iterative, therefore the insights gained at each step were used to improve the previous steps. Also in this case data gathering and raw data preparation wasn't necessary in a classical sense, because the dataset exhibited relatively good quality (e.g. well-defined features, no missing values)*
 
+## Repository structure
+
+## Baseline
+
 ## Explorative data analysis (EDA)
 
-EDA can be a tedious task, therefore (for the simplest parts) I used an automated EDA tool, *Sweetviz* to gain insights into the data I'm dealing with. For this, a report was prepared (*report.html*) which helped drawing some conclusions / making a few decisions:
+EDA can be a tedious task, therefore (for the simplest parts) I used an automated EDA tool, [*Sweetviz*](https://github.com/fbdesignpro/sweetviz "Sweetviz homepage") to gain insights into the data I'm dealing with. For this, a report was prepared (*report.html*) which helped drawing some conclusions / making a few decisions:
 1. The following features were dropped due to having 1 distinct value, therefore having no predictive value: *EmployeeCount*, *Over18*, *StandardHours*
 2. The following feature was dropped due to being a unique identifier, therefore having no predictive value: *EmployeeNumber*
 3. There is no suspicion of corrupted data, because no outliers were spotted in the report
@@ -21,3 +25,9 @@ At the end, the values are classified and treated as (some are classified as nom
 1. Target variable (binary variable): *Attrition*
 2. Numerical features: *Age*, *DailyRate*, *DistanceFromHome*, *Education*, *EnvironmentSatisfaction*, *HourlyRate*, *JobInvolvement*, *JobLevel*, *JobSatisfaction*, *MontlyIncome*, *MonthlyRate*, *NumCompaniesWorked*, *PercentSalaryHike*, *PerformanceRating*, *RelationshipSatisfaction*, *StockOptionLevel*, *TotalWorkingYears*, *TrainingTimesLastYear*, *WorkLifeBalance*, *YearsAtCompany*, *YearsInCurrentRole*, *YearsSinceLastPromotion*, *YearsWithCurrManager*
 3. Categorical features: *BusinessTravel*, *Department*, *EducationField*, *Gender*, *JobRole*, *MaritalStatus*, *OverTime*
+
+## Data transformation + feature engineering
+
+## Pattern search (modelling)
+
+## Evaluation
