@@ -23,6 +23,7 @@ The point of setting up a baseline is to decrease time-to-market, and to have an
 - Recall: 25.00%
 - Precision: 40.00%
 - F1-score: 30.77%
+
 The first metric used was accuracy, which was suspiciously convincing for a baseline, therefore I checked if we have an unbalanced issue at hand by checking the recall and precision (and their harmonic mean, the F1-score) which confirmed the hypothesis, therefore accuracy is no more the primary metric of model goodness but more suitable ones for unbalanced issues such as recall, precision and F1-score.
 
 ## Explorative data analysis (EDA)
