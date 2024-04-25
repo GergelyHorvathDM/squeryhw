@@ -16,3 +16,8 @@ EDA can be a tedious task, therefore (for the simplest parts) I used an automate
 3. There is no suspicion of corrupted data, because no outliers were spotted in the report
 4. This classification issue can be qualified as an unbalanced issue, since there are significantly (appr. 6×) more negative samples than positive ones. This is further comfirmed by the baseline experiments, where a quite convincing accuracy (around 85%) can be obtained, yet the recall remains poor (around 25%).
 5. The computed correlation matrix (w.r.t the target value) showed the first promising features, e.g. *Age*, *MonthlyIncome*, *TotalWorkingYears*. These are also making sense by only using common sense, therefore the quality of the features were asserted through both common sense and the tools of mathematics.
+
+At the end, the values are classified and treated as (some are classified as nominal/ordinal features by the report preparing library, but this is overwritten by the task description which allows me to treat them as numerical ones, which is the less strict option):
+1. Target variable (binary variable): *Attrition*
+2. Numerical features: *Age*, *DailyRate*, *DistanceFromHome*, *Education*, *EnvironmentSatisfaction*, *HourlyRate*, *JobInvolvement*, *JobLevel*, *JobSatisfaction*, *MontlyIncome*, *MonthlyRate*, *NumCompaniesWorked*, *PercentSalaryHike*, *PerformanceRating*, *RelationshipSatisfaction*, *StockOptionLevel*, *TotalWorkingYears*, *TrainingTimesLastYear*, *WorkLifeBalance*, *YearsAtCompany*, *YearsInCurrentRole*, *YearsSinceLastPromotion*, *YearsWithCurrManager*
+3. Categorical features: *BusinessTravel*, *Department*, *EducationField*, *Gender*, *JobRole*, *MaritalStatus*, *OverTime*
