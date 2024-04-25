@@ -2,7 +2,7 @@
 
 In case of this issue, attrition prediction is formulated as a binary classification type of task. Throughout the task, I've followed the standard data science process:
 1. Explorative data analysis
-2. Data transformation + feature engineering
+2. Data transformation + feature selection/engineering
 3. Pattern search
 4. Evaluation
 
@@ -16,7 +16,14 @@ In case of this issue, attrition prediction is formulated as a binary classifica
 - Finally, utils contain useful custom scripts that helped the iterative process
 - The process is detailed in this README description, the experimentation can be found in *main.ipynb*
 
-## Baseline
+## Baseline / Goal
+
+The point of setting up a baseline is to decrease time-to-market, and to have an initial idea what to improve upon. The baseline chosen was a default *KNeighborsClassifier* with a distance weighted evaluation. It was a straightforward first choice because of its explainability and simplicity. The data was filtered down to the numerical values to be able to get baseline results quickly. This baseline helped me determine the areas to be improved, and the metrics to use for evaluation. The baseline results were the following:
+- Accuracy: 84.35%
+- Recall: 25.00%
+- Precision: 40.00%
+- F1-score: 30.77%
+The first metric used was accuracy, which was suspiciously convincing for a baseline, therefore I checked if we have an unbalanced issue at hand by checking the recall and precision (and their harmonic mean, the F1-score) which confirmed the hypothesis, therefore accuracy is no more the primary metric of model goodness but more suitable ones for unbalanced issues such as recall, precision and F1-score.
 
 ## Explorative data analysis (EDA)
 
@@ -32,7 +39,7 @@ At the end, the values are classified and treated as (some are classified as nom
 2. Numerical features: *Age*, *DailyRate*, *DistanceFromHome*, *Education*, *EnvironmentSatisfaction*, *HourlyRate*, *JobInvolvement*, *JobLevel*, *JobSatisfaction*, *MontlyIncome*, *MonthlyRate*, *NumCompaniesWorked*, *PercentSalaryHike*, *PerformanceRating*, *RelationshipSatisfaction*, *StockOptionLevel*, *TotalWorkingYears*, *TrainingTimesLastYear*, *WorkLifeBalance*, *YearsAtCompany*, *YearsInCurrentRole*, *YearsSinceLastPromotion*, *YearsWithCurrManager*
 3. Categorical features: *BusinessTravel*, *Department*, *EducationField*, *Gender*, *JobRole*, *MaritalStatus*, *OverTime*
 
-## Data transformation + feature engineering
+## Data transformation + feature selection/engineering
 
 ## Pattern search (modelling)
 
