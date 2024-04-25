@@ -44,7 +44,18 @@ At the end, the values are classified and treated as (some are classified as nom
 
 ### Data transformation / Feature engineering
 
+Categoricals to numericals:
+- Binary categorical features: transform to numerical features with a value of either 0 or 1 (this is easier for machine learning models to handle)
+- Non-binary categorical features: one-hot encoding, embedding
+
+Dimension reduction:
+- PCA, t-SNE: apply them to the whole dataset or highly correlated / similar features
+
+Unbalance correction: random and synthetic over- and undersampling
+
 ### Feature selection
+
+The problem of feature selection is approached from a bottom-up and top-down direction: univariate feature selection, recursive feature elimination, which are followed by a feature permutation importance test
 
 ## Pattern search (modelling)
 
@@ -52,8 +63,26 @@ The modelling approaches used here are broken down into three categories from ex
 
 ### Base models
 
+1. K-Neighbors Classifier
+2. Decision Tree
+3. Support Vector Machine
+4. Logistic Regression
+5. Naive Bayes
+
 ### Ensemble models
+
+1. Gradient Boosting
+2. Random Forest
+3. AdaBoost
+4. XGBoost
 
 ### Deep learning
 
+Due to the size and nature of the data, anything besides a small size MLP is ill-advised, because deep learning approaches are limited in explainability, are black box in nature, and generally require more data.
+
 ## Evaluation
+
+When drawing up the baseline, a decision was made to do evaluation based on accuracy, recall, precision and F1 in order to measure not just the amount of hits, but to account for the imbalanced nature of the problem as well. The following table is an extract of this approach:
+
+## Conclusions / Possible future steps
+
