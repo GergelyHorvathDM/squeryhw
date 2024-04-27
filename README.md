@@ -53,9 +53,14 @@ Dimension reduction:
 
 Unbalance correction: random and synthetic over- and undersampling
 
+Scaling:
+- StandardScaler
+- MaxAbsScaler
+- MinMaxScaler
+
 ### Feature selection
 
-The problem of feature selection is approached from a bottom-up and top-down direction: univariate feature selection, recursive feature elimination, which are followed by a feature permutation importance test
+The problem of feature selection is approached from a top-down direction: recursive feature elimination, this is to use an exhaustive, brute force search to see the effect of ignoring features in a recursive manner
 
 ## Pattern search (modelling)
 
@@ -67,7 +72,6 @@ The modelling approaches used here are broken down into three categories from ex
 2. Decision Tree
 3. Support Vector Machine
 4. Logistic Regression
-5. Naive Bayes
 
 ### Ensemble models
 
@@ -85,11 +89,23 @@ Due to the size and nature of the data, anything besides a small size MLP is ill
 2. Used one-hot encoding to include categorical features, this didn't improved (or changed) on KNN
 3. Turned to Gradient Boosting, which was improved by the transformed categorical features
 4. Added PCA into the workflow, which shows a slight improvement, but not significant (compared to the standard deviation) enough to actually deem it improvement, although it seems to have a metric stabilizing effect during cross-validation
-5. 
+5. Now turned to resampling, to correct the balance between the minority and majority classes, first one was RandomUnderSampler with equal ratios, this resulted in significantly better recall, but worse precision
+6. Experiments were conducted with synthetic methods like SMOTE, ADASYN or SMOTEENN, they haven't provided an edge on random resampling
+7. The next experiment was to test the effect of data scaling on the result, where MinMaxScaler was able to slightly fix the precision degradation coming from resampling with only a minor decrease in recall
+8. Finally, to conclude the data preprocessing/transformation part, I've conducted RFE feature selection, but it didn't affect the result in any way
 
 ## Evaluation
 
 When drawing up the baseline, a decision was made to do evaluation based on accuracy, recall, precision and F1 in order to measure not just the amount of hits, but to account for the imbalanced nature of the problem as well. The following table is an extract of this approach, denoting important milestones (ID numbers of experiments are taken from Experiment log):
+
+| Experiment                               | Accuracy | Recall | Precision | F1     |
+|------------------------------------------|----------|--------|-----------|--------|
+| I. KNN, closest neighbor, numericals (1) | 75.99%   | 25.33% | 25.04%    | 24.96% |
+| II. Gradient boosting, numericals (3)    | 84.42%   | 21.11% | 53.89%    | 30.02% |
+| III. Gradient boosting, all features (3) | 87.14%   | 33.80% | 73.73%    | 44.33% |
+| IV. _III._ + 15-PCA (4)                  | 87.35%   | 33.88% | 74.06%    | 45.55% |
+| V. _IV._ + RandomUnderSampler (5)        | 64.76%   | 66.27% | 26.40%    | 37.70% |
+| VI. _V._ + MinMaxScaler (7)              | 72.79%   | 65.80% | 32.98%    | 43.79% |
 
 ## Conclusions / Possible future steps
 
