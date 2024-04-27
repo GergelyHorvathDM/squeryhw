@@ -46,10 +46,10 @@ At the end, the values are classified and treated as (some are classified as nom
 
 Categoricals to numericals:
 - Binary categorical features: transform to numerical features with a value of either 0 or 1 (this is easier for machine learning models to handle)
-- Non-binary categorical features: one-hot encoding, embedding
+- Non-binary categorical features: one-hot encoding
 
 Dimension reduction:
-- PCA, t-SNE: apply them to the whole dataset or highly correlated / similar features
+- PCA: apply to the whole dataset or highly correlated / similar features
 
 Unbalance correction: random and synthetic over- and undersampling
 
@@ -71,18 +71,25 @@ The modelling approaches used here are broken down into three categories from ex
 
 ### Ensemble models
 
-1. Gradient Boosting
+1. Gradient Boosting (+XGBoost)
 2. Random Forest
 3. AdaBoost
-4. XGBoost
 
 ### Deep learning
 
 Due to the size and nature of the data, anything besides a small size MLP is ill-advised, because deep learning approaches are limited in explainability, are black box in nature, and generally require more data.
 
+## Experiment log
+
+1. Performed KNN on numericals to obtain a baseline (only used the closest neighbor)
+2. Used one-hot encoding to include categorical features, this didn't improved (or changed) on KNN
+3. Turned to Gradient Boosting, which was improved by the transformed categorical features
+4. Added PCA into the workflow, which shows a slight improvement, but not significant (compared to the standard deviation) enough to actually deem it improvement, although it seems to have a metric stabilizing effect during cross-validation
+5. 
+
 ## Evaluation
 
-When drawing up the baseline, a decision was made to do evaluation based on accuracy, recall, precision and F1 in order to measure not just the amount of hits, but to account for the imbalanced nature of the problem as well. The following table is an extract of this approach:
+When drawing up the baseline, a decision was made to do evaluation based on accuracy, recall, precision and F1 in order to measure not just the amount of hits, but to account for the imbalanced nature of the problem as well. The following table is an extract of this approach, denoting important milestones (ID numbers of experiments are taken from Experiment log):
 
 ## Conclusions / Possible future steps
 
