@@ -13,6 +13,7 @@ In case of this issue, attrition prediction is formulated as a binary classifica
 - The repository was set up with a data folder to contain the source data, which is unconventional but doable due to its limited size
 - There is also a reports folder to contain the result of the EDA
 - The task description was put into a different folder as well for having a cleaner understanding of the repo structure
+- *final_results.ipynb* contains the chosen models, while *sandbox.ipynb* was the lab environment
 - Finally, utils contain useful custom scripts that helped the iterative process
 - The process is detailed in this README description, the experimentation can be found in *main.ipynb*
 
@@ -119,7 +120,7 @@ When drawing up the baseline, a decision was made to do evaluation based on accu
 | V. _IV._ + RandomUnderSampler (5)                                    | 64.76%   | 66.27% | 26.40%    | 37.70% |
 | VI. _V._ + MinMaxScaler (7)                                          | 72.79%   | 65.80% | 32.98%    | 43.79% |
 | VII. SVM with MinMaxScaler, PCA and RandomUnderSampler (11)          | 75.92%   | 69.62% | 37.28%    | 48.42% |
-| VIII. _VII._ + regularization of 0.9 (12)                            | 86.87%   | 21.16% | 91.71%    | 33.52% |
+| VIII. SVM with MinMaxScaler, PCA and regularization of 0.9 (12)      | 86.87%   | 21.16% | 91.71%    | 33.52% |
 | IX. SVM with PCA and RandomUnderSampler, with polinomial kernel (13) | 29.46%   | 92.90% | 17.79%    | 29.82% |
 | X. SVM with PCA and MinMaxScaler, with polinomial kernel (13)        | 85.51%   | 43.91% | 56.50%    | 49.24% |
 | XI. _VII._ + with sigmoidal kernel (14)                              | 73.20%   | 72.95% | 34.41%    | 46.72% |
@@ -130,9 +131,12 @@ When drawing up the baseline, a decision was made to do evaluation based on accu
 
 ## Conclusions / Possible future steps
 
-The task was to realize a binary classification model that is able to predict attrition rate at a company. The top results were not chosen based on accuracy, because this was an unbalanced problem, by predicting everything as negative class we would have been able to achieve 83.67% accuracy, which is quite convincing on its own, but the result is not usable. Therefore Recall, Precision and F1 were added to the measurements to determine the best 3 setups. 3 were chosen, because I wanted a result with high recall and low precision (A), one with low recall and high precision (B) and finally one with moderate recall and precision (C) (so the 3 main points of the recall-precision tradeoff). For this simple dataset simpler methods performed better, while ensemble methods and deep learning wasn't able to compete with these, because even if they were optimised to show the same or slightly better performance, their computational needs and challanges in terms of explainability would render them less useful. Let us look at the results:
-<ol type="A">
-  <li>Coffee</li>
-  <li>Tea</li>
-  <li>Milk</li>
-</ol>
+The task was to realize a binary classification model that is able to predict attrition rate at a company. The top results were not chosen based on accuracy, because this was an unbalanced problem, by predicting everything as negative class we would have been able to achieve 83.67% accuracy, which is quite convincing on its own, but the result is not usable. Therefore Recall, Precision and F1 were added to the measurements to determine the best 2 setups. 2 were chosen, because I wanted a result with high recall and low precision, one with low recall and high precision (so the 2 extreme points of the recall-precision tradeoff). For this simple dataset simpler methods performed better, while ensemble methods and deep learning wasn't able to compete with these, because even if they were optimised to show the same or slightly better performance, their computational needs and challanges in terms of explainability would render them less useful. Let us look at the results from the evaluation table:
+1. High recall, low precision: XIII. or IX.
+2. Low recall, high precision: VIII. or XIV. or XV.
+
+To answer which is the best one will need to further discuss with stakeholder in order to determine which has the higher cost, not finding those about to leave or producing false positives. The answer to this question would determine which to choose.
+
+Possible future steps would mainly address two things:
+1. Try-out of a broader palette of algorithms
+2. More detailed discovery of the hyperparameter space, or even hyperparametertuning

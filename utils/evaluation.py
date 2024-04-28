@@ -15,6 +15,6 @@ def compute_acc_rec_prec_f1_with_cv(model, X, y, cv_n=10):
         scores = cross_val_score(model, X, y, cv=cv, scoring=scorer)
         means[metric] = scores.mean()*100
         sdevs[metric] = scores.std()*100
-        print(f"{metric.capitalize()} score:", scores.mean()*100, "+/-", scores.std()*100)
+        print(f"\t{metric.capitalize()} score:", scores.mean()*100, "+/-", scores.std()*100)
 
     return means, sdevs
