@@ -139,4 +139,4 @@ To answer which is the best one will need to further discuss with stakeholder in
 
 Possible future steps would mainly address two things:
 1. Try-out of a broader palette of algorithms
-2. More detailed discovery of the hyperparameter space, or even hyperparametertuning
+2. More detailed discovery of the hyperparameter space, or even hyperparameter tuning
