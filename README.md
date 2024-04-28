@@ -93,19 +93,40 @@ Due to the size and nature of the data, anything besides a small size MLP is ill
 6. Experiments were conducted with synthetic methods like SMOTE, ADASYN or SMOTEENN, they haven't provided an edge on random resampling
 7. The next experiment was to test the effect of data scaling on the result, where MinMaxScaler was able to slightly fix the precision degradation coming from resampling with only a minor decrease in recall
 8. Finally, to conclude the data preprocessing/transformation part, I've conducted RFE feature selection, but it didn't affect the result in any way
+9. The first, more comprehensive model try-out was with KNN, for multiple neighbor settings and distance-based weighting (with varying distance metric as well), but the top performance was slightly under the top 2 up to this point (3, 7)
+10. The next one was DecisionTreeClassifier, but no setup was able to improve upon 3 or 7
+11. The next stop was SupportVectorClassifier with default settings, where SVM was able to improve upon 7
+12. During SVM experiments, a regularization term of 0.9 revealed a setup of a not so good recall, but an outstanding precision
+13. The final SVM experimentation was with the kernel function, where linear kernel surpassed my computational capabilities, but a polinomial kernel managed to produce the opposite of 12 when PCA and undersampling, but found a good trade-off when PCA and scaling
+14. Finally concluded the SVM kernel experimentation with a sigmoidal kernel with a good recall value and moderately bad precision value when using PCA, scaling and resampling
+15. The next one is logistic regression, where the model fails to converge without scaling, therefore logistic regression experiments will exclude setups without scaling
+16. Logistic regression with or without undersampling manages to improve upon recall with slighter decrease in precision, and also sets record for F1
+17. When using logistic regression with only PCA and scaling but without the default L2 penalty, it further improves F1
+18. To conclude logistic regression, L1 penalty did not improve on the results, while elasticnet was only able to slightly improve on L2 results
+19. The next step was quite short, since ensemble methods weren't able to improve upon the results of simple methods (Gradient Boosting and Random Forest from Sklearn and XGBoost libraries, and AdaBoost)
+20. To conlcude modelling, the last resort was deep learning, an MLP, where MLP was able to catch up to the previous results, but at a high computational cost, therefore it will not be displayed in the final table
 
 ## Evaluation
 
 When drawing up the baseline, a decision was made to do evaluation based on accuracy, recall, precision and F1 in order to measure not just the amount of hits, but to account for the imbalanced nature of the problem as well. The following table is an extract of this approach, denoting important milestones (ID numbers of experiments are taken from Experiment log):
 
-| Experiment                               | Accuracy | Recall | Precision | F1     |
-|------------------------------------------|----------|--------|-----------|--------|
-| I. KNN, closest neighbor, numericals (1) | 75.99%   | 25.33% | 25.04%    | 24.96% |
-| II. Gradient boosting, numericals (3)    | 84.42%   | 21.11% | 53.89%    | 30.02% |
-| III. Gradient boosting, all features (3) | 87.14%   | 33.80% | 73.73%    | 44.33% |
-| IV. _III._ + 15-PCA (4)                  | 87.35%   | 33.88% | 74.06%    | 45.55% |
-| V. _IV._ + RandomUnderSampler (5)        | 64.76%   | 66.27% | 26.40%    | 37.70% |
-| VI. _V._ + MinMaxScaler (7)              | 72.79%   | 65.80% | 32.98%    | 43.79% |
+| Experiment                                                           | Accuracy | Recall | Precision | F1     |
+|----------------------------------------------------------------------|----------|--------|-----------|--------|
+| I. KNN, closest neighbor, numericals (1)                             | 75.99%   | 25.33% | 25.04%    | 24.96% |
+| II. Gradient boosting, numericals (3)                                | 84.42%   | 21.11% | 53.89%    | 30.02% |
+| III. Gradient boosting, all features (3)                             | 87.14%   | 33.80% | 73.73%    | 44.33% |
+| IV. _III._ + 15-PCA (4)                                              | 87.35%   | 33.88% | 74.06%    | 45.55% |
+| V. _IV._ + RandomUnderSampler (5)                                    | 64.76%   | 66.27% | 26.40%    | 37.70% |
+| VI. _V._ + MinMaxScaler (7)                                          | 72.79%   | 65.80% | 32.98%    | 43.79% |
+| VII. SVM with MinMaxScaler, PCA and RandomUnderSampler (11)          | 75.92%   | 69.62% | 37.28%    | 48.42% |
+| VIII. _VII._ + regularization of 0.9 (12)                            | 86.87%   | 21.16% | 91.71%    | 33.52% |
+| IX. SVM with PCA and RandomUnderSampler, with polinomial kernel (13) | 29.46%   | 92.90% | 17.79%    | 29.82% |
+| X. SVM with PCA and MinMaxScaler, with polinomial kernel (13)        | 85.51%   | 43.91% | 56.50%    | 49.24% |
+| XI. _VII._ + with sigmoidal kernel (14)                              | 73.20%   | 72.95% | 34.41%    | 46.72% |
+| XII. LogisticRegression with PCA and scaling (16)                    | 88.37%   | 38.01% | 79.90%    | 50.86% |
+| XIII. _XII._ + RandomUnderSampler (16)                               | 74.01%   | 74.69% | 35.66%    | 48.16% |
+| XIV. _XII._ without penalty term (17)                                | 88.03%   | 42.23% | 73.00%    | 52.62% |
+| XV. _XII._ with ElasticNet penalty term (18)                         | 88.50%   | 38.86% | 79.92%    | 51.68% |
 
 ## Conclusions / Possible future steps
 
